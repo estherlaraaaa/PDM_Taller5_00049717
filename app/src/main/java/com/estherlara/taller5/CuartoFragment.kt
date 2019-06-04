@@ -1,11 +1,16 @@
 package com.estherlara.taller5
 
 
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import kotlinx.android.synthetic.main.fragment_cuarto.*
+import kotlinx.android.synthetic.main.fragment_tercer.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,6 +24,20 @@ private const val ARG_PARAM2 = "param2"
  */
 class CuartoFragment : Fragment() {
 
+    private var listener: TercerFragment.OnFragmentInteractionListener? = null
+
+
+    interface OnFragmentInteractionListener {
+        fun onFragmentInteraction(uri: Uri)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        btn_4.setOnClickListener { view ->
+            Navigation.findNavController(view).navigate(R.id.actionNext)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,5 +46,13 @@ class CuartoFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_cuarto, container, false)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is TercerFragment.OnFragmentInteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException(context.toString() + " must implement OnFragmentInteractionListener")
+        }
+    }
 
 }

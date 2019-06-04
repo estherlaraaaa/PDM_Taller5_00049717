@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import kotlinx.android.synthetic.main.fragment_segundo.*
+import kotlinx.android.synthetic.main.fragment_tercer.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -34,6 +37,13 @@ class SegundoFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        btn_2.setOnClickListener { view ->
+            Navigation.findNavController(view).navigate(R.id.actionNext)
         }
     }
 
